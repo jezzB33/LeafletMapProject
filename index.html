@@ -23,6 +23,19 @@
   <script>
     // Initialize the map
     var map = L.map('map').setView([51.505, -0.09], 13);
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leaflet Map with KML</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="path/to/L.KML.js"></script> <!-- Replace with actual path to the downloaded plugin -->
+</head>
+<body>
+  <div id="map" style="width: 100%; height: 600px;"></div>
+  <script>
+    // Initialize the map
+    var map = L.map('map').setView([51.505, -0.09], 13);
 
     // Add a tile layer (OpenStreetMap)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -31,49 +44,30 @@
 
     // Array of KML file paths
     var kmlFiles = [
-      'Spruce Plantation.kml',
-      'Scots Pine & Mixed Woodland.kml',
-      'Hedge Row Development Areas 1.2.kml',
-      'Hedge Row Development Areas 1.1.kml',
-      'Hedge Row Development Areas 1.3.kml',
-      'Monument Area.kml',
-      'Nursery Park Woodland.kml',
-      'Large Population Mixed Woodland.kml',
-      'Crab Apple Plantation A.kml',
-      'Crab Apple Plantation B.kml',
-      'Hardy\'s Wall Woodland.kml',
-      'Hardy\'s Wall Hedge Row.kml'
+      'Native_Species_Development.kml' // Add more file paths if needed
     ];
 
-    // Object to store KML layers for the control
+    // Object to store KML layers for the layer control
     var overlayLayers = {};
 
     // Loop through each KML file
     kmlFiles.forEach(function (filePath) {
-      fetch(filePath)
-        .then(response => response.text())
-        .then(kmlText => {
-          var parser = new DOMParser();
-          var kmlDoc = parser.parseFromString(kmlText, 'text/xml');
-          var kmlLayer = new L.KML(kmlDoc);
+      // Create a new KML layer
+      var kmlLayer = new L.KML(filePath, {
+        async: true // Ensure async loading
+      });
 
-          // Add the layer to the map
-          kmlLayer.addTo(map);
+      // Add the layer to the map
+      kmlLayer.on('loaded', function () {
+        map.fitBounds(kmlLayer.getBounds()); // Adjust the map to the layer's bounds
+      }).addTo(map);
 
-          // Add the layer to the overlayLayers object for control
-          overlayLayers[filePath] = kmlLayer;
-
-          // Fit the map bounds to include this layer
-          var bounds = kmlLayer.getBounds();
-          map.fitBounds(bounds);
-        })
-        .catch(error => console.error('Error loading KML file:', filePath, error));
+      // Add the layer to the overlayLayers object for layer control
+      overlayLayers[filePath] = kmlLayer;
     });
 
     // Add a layer control to the map
     L.control.layers(null, overlayLayers).addTo(map);
-
   </script>
 </body>
 </html>
-
