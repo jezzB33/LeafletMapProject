@@ -22,20 +22,20 @@
   <div id="map"></div>
   <script>
     // Initialize the map
-    var map = L.map('map').setView([51.505, -0.09], 13);
+    var map = L.map('map').setView([55.9406324, -2.6413234], 13);
 <!DOCTYPE html>
 <html>
 <head>
   <title>Leaflet Map with KML</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="path/to/L.KML.js"></script> <!-- Replace with actual path to the downloaded plugin -->
+  <script src="L.KML.js"></script> <!-- Replace with actual path to the downloaded plugin -->
 </head>
 <body>
   <div id="map" style="width: 100%; height: 600px;"></div>
   <script>
     // Initialize the map
-    var map = L.map('map').setView([51.505, -0.09], 13);
+    var map = L.map('map').setView([55.9406324, -2.6413234], 13);
 
     // Add a tile layer (OpenStreetMap)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -44,7 +44,7 @@
 
     // Array of KML file paths
     var kmlFiles = [
-      'Native_Species_Development.kml' // Add more file paths if needed
+      'Native_Species_Development_backup.kml' // Add more file paths if needed
     ];
 
     // Object to store KML layers for the layer control
