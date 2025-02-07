@@ -1,73 +1,112 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Interactive Map with KML Layers</title>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sustainable Land Management & Interactive Map</title>
+  
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <!-- Leaflet KML Plugin -->
-  <script src="path/to/L.KML.js"></script>
+  <!-- Leaflet KML Plugin (update the path as needed) -->
+  <script src="L.KML.js"></script>
+  
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      max-width: 900px;
+      line-height: 1.6;
+      color: #333;
+    }
+    h1, h2 {
+      color: #005a00;
+    }
     #map {
       width: 100%;
       height: 600px;
+      margin-bottom: 40px;
+    }
+    .contact {
+      margin-top: 20px;
+      padding-top: 10px;
+      border-top: 1px solid #ccc;
     }
   </style>
 </head>
 <body>
+
+  <!-- Interactive Map Section -->
   <h1>Interactive Map with KML Layers</h1>
   <div id="map"></div>
   <script>
-    // Initialize the map
+    // Initialize the map centered at the given coordinates
     var map = L.map('map').setView([55.9406324, -2.6413234], 13);
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Leaflet Map with KML</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="L.KML.js"></script> <!-- Replace with actual path to the downloaded plugin -->
-</head>
-<body>
-  <div id="map" style="width: 100%; height: 600px;"></div>
-  <script>
-    // Initialize the map
-    var map = L.map('map').setView([55.9406324, -2.6413234], 13);
-
-    // Add a tile layer (OpenStreetMap)
+    
+    // Add an OpenStreetMap tile layer
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19
     }).addTo(map);
-
-    // Array of KML file paths
+    
+    // Array of KML file paths (update with additional files if needed)
     var kmlFiles = [
-      'Native_Species_Development_backup.kml' // Add more file paths if needed
+      'Native_Species_Development_backup.kml'
     ];
-
+    
     // Object to store KML layers for the layer control
     var overlayLayers = {};
-
-    // Loop through each KML file
+    
+    // Loop through each KML file and add it to the map
     kmlFiles.forEach(function (filePath) {
-      // Create a new KML layer
-      var kmlLayer = new L.KML(filePath, {
-        async: true // Ensure async loading
-      });
-
-      // Add the layer to the map
+      var kmlLayer = new L.KML(filePath, { async: true });
       kmlLayer.on('loaded', function () {
-        map.fitBounds(kmlLayer.getBounds()); // Adjust the map to the layer's bounds
+        map.fitBounds(kmlLayer.getBounds());
       }).addTo(map);
-
-      // Add the layer to the overlayLayers object for layer control
       overlayLayers[filePath] = kmlLayer;
     });
-
-    // Add a layer control to the map
+    
+    // Add a layer control to toggle KML layers
     L.control.layers(null, overlayLayers).addTo(map);
   </script>
+  
+  <hr>
+  
+  <!-- Sustainable Land Management Services Content -->
+  <h1>Sustainable Land Management Services</h1>
+  <p><strong>Regenerative land stewardship, sustainable greenhouse design, traditional scything, and precision aerial services.</strong></p>
+
+  <h2>Regenerative Land Stewardship</h2>
+  <ul>
+      <li><strong>Natural Agriculture Systems:</strong> I apply traditional Japanese natural farming methods—such as Fukuoka-inspired no-till practices, seed ball technology, and closed-loop fertility management—to promote chemical-free, soil-first agriculture.</li>
+      <li><strong>Native Forest Restoration & Deforestation Mitigation:</strong> Utilizing techniques like the Miyawaki method for ultra-dense native planting, I help restore ancient woodlands and develop biodiverse, self-sustaining mini-forests.</li>
+      <li><strong>Permaculture Orchards & Holistic Woodland Planning:</strong> I design climate-adapted food forests that integrate native cultivars with companion species, supported by GIS-mapped biodiversity corridors and multi-generational stewardship blueprints.</li>
+  </ul>
+
+  <h2>Sustainable Walipini & Geothermal Design</h2>
+  <p>I specialize in designing earth-sheltered greenhouses (Walipinis) that harness geothermal principles for year-round food production. This includes 3D terrain mapping, custom layouts, and integrated water tank heating systems—all aimed at reducing energy costs and optimizing crop yields.</p>
+  <p>Additional services such as Olla irrigation system design ensure that water use is minimized while maintaining soil moisture balance naturally.</p>
+
+  <h2>Traditional Scything for Organic Land & Crop Care</h2>
+  <ul>
+      <li>I offer precision scything services for organic cereal crop roguing, meadow and pasture restoration, and garden maintenance.</li>
+      <li>These techniques provide an eco-friendly alternative to machinery, enhancing biodiversity and protecting pollinator habitats without the use of herbicides or fossil fuels.</li>
+      <li>I also conduct training workshops to share these time-tested methods with farmers, landowners, and gardeners.</li>
+  </ul>
+
+  <h2>Precision Aerial Services</h2>
+  <p>With FAA-certified drone operations, I deliver high-resolution aerial mapping, crop health analysis, and precision spraying. These services support modern organic farming by providing data-driven insights to optimize irrigation, pest management, and overall field productivity.</p>
+
+  <div class="contact">
+    <h2>Contact</h2>
+    <p>
+      Jack Avison<br>
+      Founder, Neo-Natural Agricultural Services<br>
+      📞 07498 334034<br>
+      📧 <a href="mailto:jackavison84@gmail.com">jackavison84@gmail.com</a><br>
+      🌍 <a href="[Website URL]">[Website URL]</a>
+    </p>
+  </div>
+
 </body>
 </html>
